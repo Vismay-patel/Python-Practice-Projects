@@ -55,6 +55,13 @@ class Snake():
         new_piece.goto(x, y)
         self.segments.append(new_piece)
 
+    def reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
     def score_count(self):
         self.score += 1
 
