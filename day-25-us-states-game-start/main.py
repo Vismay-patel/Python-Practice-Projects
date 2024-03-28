@@ -29,6 +29,12 @@ while state_count != 50:
     if answer_state in given_answer:
         continue
     elif answer_state == 'exit':
+        missing_states = []
+        for state in states:
+            if state not in given_answer:
+                missing_states.append(state)
+        new_data = pd.DataFrame(missing_states)
+        new_data.to_csv("day-25-us-states-game-start/missing_states.csv")
         break
     elif answer_state in states:
         x = df.loc[df['state'] == answer_state, 'x'].iloc[0]
@@ -42,8 +48,3 @@ states_to_learn = []
 for state in states:
     if state not in given_answer:
         states_to_learn.append(state)
-
-data_dict = {'name': states_to_learn}
-
-new_df = pd.DataFrame(data_dict)
-new_df.to_csv("day-25-us-states-game-start/states_to_learn.csv", index=False)
